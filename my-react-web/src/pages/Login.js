@@ -43,8 +43,6 @@ export default class Login extends React.Component{
 
     //登录
     login = () => {
-        
-        console.log('点击登录', this.state.userName, this.state.userPassword)
         if(this.state.userName != 'admin'){
             message.error('用户名错误！');
             return
@@ -54,14 +52,9 @@ export default class Login extends React.Component{
             return
         }
 
-        console.log('dengl')
-
-        // localStorage.setItem('userInfo',true)
+        localStorage.setItem('USER_INFO',this.state.userName)
         // console.log('跳转至详情页面，同时将登录状态保存进localstorage',this)
-        // this.props.history.push('/content')
-
-        
-        // dispatch(updateUserName(this.state.userName))
+        this.props.history.push('/content')
         
     }
 
