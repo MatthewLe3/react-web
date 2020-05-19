@@ -1,5 +1,5 @@
 import Login from '../pages/Login'
-import Content from '../pages/Content'
+import ContentPage from '../pages/Content'
 // import Home from '../pages/Content/Home'
 // import Table from '../pages/Content/Table'
 
@@ -15,7 +15,7 @@ const routes = [
 	},
 	{
 		path: '/content',
-        component: Content,
+        component: ContentPage,
         // children:[
         //     {
         //         path:'/content/home',
