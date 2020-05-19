@@ -4,8 +4,6 @@ import App from './App';
 import './style/index.less'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <App />,
   document.getElementById('root')
 );

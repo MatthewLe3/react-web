@@ -1,0 +1,13 @@
+body,
+html,
+#root,
+.App {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+#root {
+  position: relative;
+  background-color: #f1f2f5;
+}
