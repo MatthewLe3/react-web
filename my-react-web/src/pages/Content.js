@@ -2,6 +2,7 @@ import React from 'react'
 import '../style/content/content.less'
 import { Layout, Menu, Badge, Avatar, Dropdown } from 'antd';
 import { BrowserRouter as Router, Route } from "react-router-dom"
+import { connect } from 'react-redux'
 
 import {
     MenuUnfoldOutlined,
@@ -29,7 +30,7 @@ const { SubMenu } = Menu
 
 
 
-export default class ContentPage extends React.Component {
+class ContentPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -39,8 +40,7 @@ export default class ContentPage extends React.Component {
             current: '',
             defaultOpenKeys: [],
             selectedKeys: [],
-            openKeys: [],
-            userName: 'aa'
+            openKeys: []
         }
     }
 
@@ -60,6 +60,8 @@ export default class ContentPage extends React.Component {
         if (!this.state.isAuthenticated) {
             const { history } = this.props
             history.replace('/login')
+        } else {
+            this.props.setUserName(window.localStorage.getItem('USER_INFO'))
         }
     }
 
@@ -77,6 +79,7 @@ export default class ContentPage extends React.Component {
     }
 
     render() {
+        console.log('dd', this)
         const myMenu = (
             <Menu>
                 <Menu.Item>
@@ -166,7 +169,7 @@ export default class ContentPage extends React.Component {
                                             <Avatar size={24} src={myAvatar} />
                                         </div>
                                         <div className='header-userName'>
-                                            <span>{this.state.userName}</span>
+                                            <span>{this.props.userName}</span>
                                         </div>
                                     </div>
                                 </Dropdown>
@@ -243,3 +246,18 @@ export default class ContentPage extends React.Component {
         this.props.history.push('/login')
     }
 }
+
+//需要渲染什么数据
+function mapStateToProps(state) {
+    return {
+        userName: state
+    }
+}
+//需要触发什么行为
+function mapDispatchToProps(dispatch) {
+    return {
+        setUserName: (val) => dispatch({ type: 'SET_USERNAME', name: val })
+    }
+}
+
+export default ContentPage = connect(mapStateToProps, mapDispatchToProps)(ContentPage)
