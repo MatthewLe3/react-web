@@ -32,3 +32,27 @@
 .content .ant-layout {
   height: 100%;
 }
+.header-info {
+  float: right;
+  line-height: 64px;
+  padding: 0 24px;
+}
+.header-info div {
+  display: inline-block;
+}
+.ant-badge {
+  vertical-align: middle;
+}
+.header-notice,
+.header-github {
+  font-size: 18px;
+  margin-left: 35px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.header-avatar {
+  margin-left: 35px;
+}
+.header-userName {
+  margin-left: 15px;
+}

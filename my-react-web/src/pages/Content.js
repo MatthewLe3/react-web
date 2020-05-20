@@ -1,6 +1,6 @@
 import React from 'react'
 import '../style/content/content.less'
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Badge, Avatar, Dropdown } from 'antd';
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
 import {
@@ -13,13 +13,21 @@ import {
     ProfileOutlined,
     CheckCircleOutlined,
     WarningOutlined,
-    HighlightOutlined
+    HighlightOutlined,
+    BellOutlined,
+    GithubOutlined
 } from '@ant-design/icons';
+
+import myAvatar from '../asstes/img/avatar.png'
+
 
 
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu
+
+
+
 
 export default class ContentPage extends React.Component {
     constructor(props) {
@@ -28,23 +36,24 @@ export default class ContentPage extends React.Component {
             isAuthenticated: window.localStorage.getItem('USER_INFO') ? true : false,
             collapsed: false,
             openKeys: ['home'],
-            current:'',
-            defaultOpenKeys:[],
-            selectedKeys:[],
-            openKeys:[]
+            current: '',
+            defaultOpenKeys: [],
+            selectedKeys: [],
+            openKeys: [],
+            userName: 'aa'
         }
     }
 
     rootSubmenuKeys = ['form', 'list', 'profile', 'result', 'exception', 'account', 'edit'];
     menuList = {
-        'home':['home'],
-        'form':['basic-form','step-form','advanced-form'],
-        'list':['table-list','basic-list','card-list'],
-        'profile':['basic','advanced'],
-        'result':['success','fail'],
-        'exception':['403','404','500'],
-        'account':['center','setting'],
-        'edit':['flow','mind','koni']
+        'home': ['home'],
+        'form': ['basic-form', 'step-form', 'advanced-form'],
+        'list': ['table-list', 'basic-list', 'card-list'],
+        'profile': ['basic', 'advanced'],
+        'result': ['success', 'fail'],
+        'exception': ['403', '404', '500'],
+        'account': ['center', 'setting'],
+        'edit': ['flow', 'mind', 'koni']
     }
 
     componentWillMount() {
@@ -54,27 +63,49 @@ export default class ContentPage extends React.Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         let pathArr = this.props.history.location.pathname.split('/')
         Object.keys(this.menuList).map((val => {
-            if(this.menuList[val].includes(pathArr[pathArr.length-1])){
-                console.log('dddd',val)
+            if (this.menuList[val].includes(pathArr[pathArr.length - 1])) {
+                console.log('dddd', val)
                 this.setState({
-                    openKeys:[val],
-                    selectedKeys:[pathArr[pathArr.length-1]]
+                    openKeys: [val],
+                    selectedKeys: [pathArr[pathArr.length - 1]]
                 })
             }
         }))
     }
 
     render() {
+        const myMenu = (
+            <Menu>
+                <Menu.Item>
+                    <span onClick={this.JumpToCenter}>
+                        个人中心
+                    </span>
+                </Menu.Item>
+                <Menu.Item>
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/vanliant">
+                        Github
+                </a>
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item>
+                    <span onClick={this.layout}>
+                        退出登录
+                    </span>
+                </Menu.Item>
+
+            </Menu>
+        );
+
         return (
             <div className='content'>
                 <Layout>
                     <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
                         <div className="logo" />
-                        <Menu theme="dark" mode="inline" 
-                            selectedKeys={this.state.selectedKeys}  
+                        <Menu theme="dark" mode="inline"
+                            selectedKeys={this.state.selectedKeys}
                             openKeys={this.state.openKeys}
                             onClick={(key) => this.clickMenu(key)}
                             onOpenChange={this.onOpenChange}>
@@ -121,6 +152,29 @@ export default class ContentPage extends React.Component {
                                 className: 'trigger',
                                 onClick: this.toggle,
                             })}
+
+                            <div className='header-info'>
+                                <div>
+                                    <Badge count={7}>
+                                        <BellOutlined className='header-notice' />
+                                    </Badge>
+                                </div>
+
+                                <Dropdown overlay={myMenu} placement="bottomCenter">
+                                    <div style={{ cursor: 'pointer' }}>
+                                        <div className='header-avatar'>
+                                            <Avatar size={24} src={myAvatar} />
+                                        </div>
+                                        <div className='header-userName'>
+                                            <span>{this.state.userName}</span>
+                                        </div>
+                                    </div>
+                                </Dropdown>
+
+                                <div>
+                                    <GithubOutlined className='header-github' onClick={this.jumpToGithub} />
+                                </div>
+                            </div>
                         </Header>
                         <Content
                             className="site-layout-background"
@@ -160,15 +214,32 @@ export default class ContentPage extends React.Component {
     };
 
     clickMenu = (value) => {
-        this.props.history.push('/content/'+value.key)
+        this.props.history.push('/content/' + value.key)
 
         Object.keys(this.menuList).map((val => {
-            if(this.menuList[val].includes(value.key)){
+            if (this.menuList[val].includes(value.key)) {
                 this.setState({
-                    openKeys:[val],
-                    selectedKeys:[value.key]
+                    openKeys: [val],
+                    selectedKeys: [value.key]
                 })
             }
         }))
+    }
+
+    jumpToGithub = () => {
+        window.open("https://github.com/vanliant");
+    }
+
+    JumpToCenter = () => {
+        this.props.history.push('/content/center')
+        this.setState({
+            openKeys: ['account'],
+            selectedKeys: ['center']
+        })
+    }
+
+    layout = () => {
+        localStorage.removeItem('USER_INFO')
+        this.props.history.push('/login')
     }
 }
