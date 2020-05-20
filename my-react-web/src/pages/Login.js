@@ -54,7 +54,7 @@ export default class Login extends React.Component{
 
         localStorage.setItem('USER_INFO',this.state.userName)
         // console.log('跳转至详情页面，同时将登录状态保存进localstorage',this)
-        this.props.history.push('/content')
+        this.props.history.push('/content/home')
         
     }
 

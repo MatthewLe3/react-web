@@ -1,6 +1,7 @@
 import React from 'react'
 import '../style/content/content.less'
 import { Layout, Menu } from 'antd';
+import { BrowserRouter as Router, Route } from "react-router-dom"
 
 import {
     MenuUnfoldOutlined,
@@ -27,10 +28,24 @@ export default class ContentPage extends React.Component {
             isAuthenticated: window.localStorage.getItem('USER_INFO') ? true : false,
             collapsed: false,
             openKeys: ['home'],
+            current:'',
+            defaultOpenKeys:[],
+            selectedKeys:[],
+            openKeys:[]
         }
     }
 
     rootSubmenuKeys = ['form', 'list', 'profile', 'result', 'exception', 'account', 'edit'];
+    menuList = {
+        'home':['home'],
+        'form':['basic-form','step-form','advanced-form'],
+        'list':['table-list','basic-list','card-list'],
+        'profile':['basic','advanced'],
+        'result':['success','fail'],
+        'exception':['403','404','500'],
+        'account':['center','setting'],
+        'edit':['flow','mind','koni']
+    }
 
     componentWillMount() {
         if (!this.state.isAuthenticated) {
@@ -39,21 +54,37 @@ export default class ContentPage extends React.Component {
         }
     }
 
+    componentDidMount(){
+        let pathArr = this.props.history.location.pathname.split('/')
+        Object.keys(this.menuList).map((val => {
+            if(this.menuList[val].includes(pathArr[pathArr.length-1])){
+                console.log('dddd',val)
+                this.setState({
+                    openKeys:[val],
+                    selectedKeys:[pathArr[pathArr.length-1]]
+                })
+            }
+        }))
+    }
+
     render() {
         return (
             <div className='content'>
                 <Layout>
                     <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
                         <div className="logo" />
-                        <Menu theme="dark" mode="inline" openKeys={this.state.openKeys}
+                        <Menu theme="dark" mode="inline" 
+                            selectedKeys={this.state.selectedKeys}  
+                            openKeys={this.state.openKeys}
+                            onClick={(key) => this.clickMenu(key)}
                             onOpenChange={this.onOpenChange}>
                             <Menu.Item key="home" icon={<HomeOutlined />}>
                                 主页
                         </Menu.Item>
                             <SubMenu key="form" icon={<FormOutlined />} title="表单页">
-                                <Menu.Item key="basic-from">基础表单</Menu.Item>
-                                <Menu.Item key="step-from">分步表单</Menu.Item>
-                                <Menu.Item key="advanced-from">高级表单</Menu.Item>
+                                <Menu.Item key="basic-form">基础表单</Menu.Item>
+                                <Menu.Item key="step-form">分步表单</Menu.Item>
+                                <Menu.Item key="advanced-form">高级表单</Menu.Item>
                             </SubMenu>
                             <SubMenu key="list" icon={<TableOutlined />} title="列表页">
                                 <Menu.Item key="table-list">查询表格</Menu.Item>
@@ -99,8 +130,12 @@ export default class ContentPage extends React.Component {
                                 minHeight: 280,
                             }}
                         >
-                            Content
-          </Content>
+                            {
+                                this.props.routes.map((v, i) => {
+                                    return <Route key={i} path={v.path} component={v.component} exact></Route>
+                                })
+                            }
+                        </Content>
                     </Layout>
                 </Layout>
             </div>
@@ -123,4 +158,17 @@ export default class ContentPage extends React.Component {
             });
         }
     };
+
+    clickMenu = (value) => {
+        this.props.history.push('/content/'+value.key)
+
+        Object.keys(this.menuList).map((val => {
+            if(this.menuList[val].includes(value.key)){
+                this.setState({
+                    openKeys:[val],
+                    selectedKeys:[value.key]
+                })
+            }
+        }))
+    }
 }
