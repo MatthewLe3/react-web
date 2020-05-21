@@ -183,7 +183,7 @@ class ContentPage extends React.Component {
                             className="site-layout-background"
                             style={{
                                 margin: '24px 16px',
-                                padding: 24,
+                                padding: '24px 0',
                                 minHeight: 280,
                             }}
                         >

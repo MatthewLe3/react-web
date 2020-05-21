@@ -1,8 +1,8 @@
 import React from 'react'
 
 export default class NotFound extends React.Component{
-    construct(props){
-        props(props)
+    constructor(props){
+        super(props)
     }
 
     render(){
