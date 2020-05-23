@@ -32,6 +32,22 @@ export default class Home extends React.Component {
                 { date: '2020-05-12', num: 123 },
                 { date: '2020-05-13', num: 311 },
                 { date: '2020-05-14', num: 201 },
+            ],
+            visitedData: [
+                { date: '2020-05-01', num: 21 },
+                { date: '2020-05-02', num: 32 },
+                { date: '2020-05-03', num: 31 },
+                { date: '2020-05-04', num: 12 },
+                { date: '2020-05-05', num: 23 },
+                { date: '2020-05-06', num: 21 },
+                { date: '2020-05-07', num: 12 },
+                { date: '2020-05-08', num: 43 },
+                { date: '2020-05-09', num: 43 },
+                { date: '2020-05-10', num: 12 },
+                { date: '2020-05-11', num: 11 },
+                { date: '2020-05-12', num: 53 },
+                { date: '2020-05-13', num: 3 },
+                { date: '2020-05-14', num: 13 },
             ]
         }
     }
@@ -131,6 +147,7 @@ export default class Home extends React.Component {
 
     drawChart = () => {
         const data = this.state.payData
+        const visitedData = this.state.visitedData
 
         // Step 1: 创建 Chart 对象
         const chart = new Chart({
@@ -144,7 +161,6 @@ export default class Home extends React.Component {
         // Step 2: 载入数据源
         chart.data(data);
         
-
         // Step 3: 创建图形语法，绘制柱状图
         chart.axis('num', false)
         .interval()
@@ -165,5 +181,36 @@ export default class Home extends React.Component {
 
         // Step 4: 渲染图表
         chart.render();
+
+
+        const visitedChart = new Chart({
+            container: 'visitedChart', // 指定图表容器 ID
+            // width: document.querySelector('#payChart').offsetWidth, // 指定图表宽度
+            height: document.querySelector('#visitedChart').offsetHeight, // 指定图表高度
+            padding: [20, 10, 0, 10],
+            autoFit: true,
+        });
+        visitedChart.data(visitedData);
+
+        visitedChart
+        .line()
+        .position('date*num')
+        .color('',()=>{
+            return '#975fe4'
+        })
+        .shape('smooth');
+
+
+        visitedChart
+        .area()
+        .position('date*num')
+        .color('',()=>{
+            return '#975fe4'
+        })
+
+        // #975fe4
+
+        visitedChart.axis('num', false)
+        visitedChart.render();
     }
 }
