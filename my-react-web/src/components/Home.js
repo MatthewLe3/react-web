@@ -1,10 +1,12 @@
 import React from 'react'
 import '../style/content/home.less'
 
-import { Tooltip, Progress } from 'antd'
+import { Tooltip, Progress,Tabs } from 'antd'
 import { ExclamationCircleOutlined, CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 
 import { Chart } from '@antv/g2';
+
+const { TabPane } = Tabs;
 
 
 export default class Home extends React.Component {
@@ -81,6 +83,22 @@ export default class Home extends React.Component {
                             </div>
                         )
                     })}
+                </div>
+                <div className='body-content'>
+                    <div>
+                    <Tabs defaultActiveKey="1" onChange={callback}>
+    <TabPane tab="Tab 1" key="1">
+      Content of Tab Pane 1
+    </TabPane>
+    <TabPane tab="Tab 2" key="2">
+      Content of Tab Pane 2
+    </TabPane>
+    <TabPane tab="Tab 3" key="3">
+      Content of Tab Pane 3
+    </TabPane>
+  </Tabs>,
+
+                    </div>
                 </div>
             </div>
         )
@@ -208,9 +226,11 @@ export default class Home extends React.Component {
             return '#975fe4'
         })
 
-        // #975fe4
-
         visitedChart.axis('num', false)
         visitedChart.render();
     }
 }
+
+function callback(key) {
+    console.log(key);
+  }
