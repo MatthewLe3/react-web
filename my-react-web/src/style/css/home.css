@@ -60,3 +60,8 @@
   top: 50%;
   transform: translateY(-50%);
 }
+#visitedChart,
+#payChart {
+  height: 100%;
+  width: 100%;
+}
