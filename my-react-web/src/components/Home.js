@@ -1,12 +1,14 @@
 import React from 'react'
 import '../style/content/home.less'
 
-import { Tooltip, Progress,Tabs } from 'antd'
+import { Tooltip, Progress, Tabs } from 'antd'
 import { ExclamationCircleOutlined, CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 
 import { Chart } from '@antv/g2';
 
 const { TabPane } = Tabs;
+
+const operations = '时间';
 
 
 export default class Home extends React.Component {
@@ -86,17 +88,14 @@ export default class Home extends React.Component {
                 </div>
                 <div className='body-content'>
                     <div>
-                    <Tabs defaultActiveKey="1" onChange={callback}>
-    <TabPane tab="Tab 1" key="1">
-      Content of Tab Pane 1
+                        <Tabs defaultActiveKey="1" onChange={callback} className='body-tab' tabBarExtraContent={operations}>
+                            <TabPane tab="销售额" key="1">
+                                Content of Tab Pane 1
     </TabPane>
-    <TabPane tab="Tab 2" key="2">
-      Content of Tab Pane 2
+                            <TabPane tab="访问量" key="2">
+                                Content of Tab Pane 2
     </TabPane>
-    <TabPane tab="Tab 3" key="3">
-      Content of Tab Pane 3
-    </TabPane>
-  </Tabs>,
+                        </Tabs>
 
                     </div>
                 </div>
@@ -108,7 +107,7 @@ export default class Home extends React.Component {
         setTimeout(() => {
             this.drawChart()
         }, 100);
-        
+
     }
 
     bodyHtml = val => {
@@ -131,7 +130,7 @@ export default class Home extends React.Component {
             )
         } else if (val.type == 'bar') {
             return (
-                <div  id='payChart' className='chart-content'></div>
+                <div id='payChart' className='chart-content'></div>
             )
         } else if (val.type == 'progress') {
             return (
@@ -178,11 +177,11 @@ export default class Home extends React.Component {
 
         // Step 2: 载入数据源
         chart.data(data);
-        
+
         // Step 3: 创建图形语法，绘制柱状图
         chart.axis('num', false)
-        .interval()
-        .position('date*num')
+            .interval()
+            .position('date*num')
         // .label('num',{
         //     offset: 10, // 文本距离图形的距离
         //     textStyle: {
@@ -211,20 +210,20 @@ export default class Home extends React.Component {
         visitedChart.data(visitedData);
 
         visitedChart
-        .line()
-        .position('date*num')
-        .color('',()=>{
-            return '#975fe4'
-        })
-        .shape('smooth');
+            .line()
+            .position('date*num')
+            .color('', () => {
+                return '#975fe4'
+            })
+            .shape('smooth');
 
 
         visitedChart
-        .area()
-        .position('date*num')
-        .color('',()=>{
-            return '#975fe4'
-        })
+            .area()
+            .position('date*num')
+            .color('', () => {
+                return '#975fe4'
+            })
 
         visitedChart.axis('num', false)
         visitedChart.render();
@@ -233,4 +232,4 @@ export default class Home extends React.Component {
 
 function callback(key) {
     console.log(key);
-  }
+}

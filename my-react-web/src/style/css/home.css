@@ -71,3 +71,9 @@
 .body-content div {
   background-color: #fff;
 }
+.body-content div .body-tab {
+  padding: 0 24px;
+}
+.body-content div .body-tab /deep/ .ant-tabs-ink-bar {
+  background-color: #1990ff;
+}
