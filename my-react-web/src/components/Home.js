@@ -60,18 +60,21 @@ export default class Home extends React.Component {
                 { date: '2020-05-14', num: 13 },
             ],
             startDate: '2020-01-01',
-            endDate: '2020-01-02'
+            endDate: '2020-01-02',
+            dateType:'today'
         }
     }
 
     render() {
+
         const operations = <div className='rightDate'>
-            <div className='changeDate' onClick={() => { this.getDate('today') }}>今日</div>
-            <div className='changeDate' onClick={() => { this.getDate('week') }}>本周</div>
-            <div className='changeDate' onClick={() => { this.getDate('month') }}>本月</div>
-            <div className='changeDate' onClick={() => { this.getDate('year') }}>本年</div>
+            <div className={this.state.dateType == 'today' ? 'changeDate activeDate' : 'changeDate'} onClick={() => { this.getDate('today') }}>今日</div>
+            <div className={this.state.dateType == 'week' ? 'changeDate activeDate' : 'changeDate'} onClick={() => { this.getDate('week') }}>本周</div>
+            <div className={this.state.dateType == 'month' ? 'changeDate activeDate' : 'changeDate'} onClick={() => { this.getDate('month') }}>本月</div>
+            <div className={this.state.dateType == 'year' ? 'changeDate activeDate' : 'changeDate'} onClick={() => { this.getDate('year') }}>本年</div>
             <RangePicker value={[moment(this.state.startDate, dateFormat), moment(this.state.endDate, dateFormat)]} onChange={(date,dateString)=>this.changeDate(date,dateString)} />
         </div>;
+        
 
         return (
             <div>
@@ -120,6 +123,8 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
+        this.getDate('today')
+
         setTimeout(() => {
             this.drawChart()
         }, 100);
@@ -250,7 +255,8 @@ export default class Home extends React.Component {
         if(type == 'today'){
             this.setState({
                 startDate:dayjs().format('YYYY-MM-DD'),
-                endDate:dayjs().format('YYYY-MM-DD')
+                endDate:dayjs().format('YYYY-MM-DD'),
+                dateType:'today'
             })
         }else if(type == 'week'){
             let dayLeft = 7 - dayjs().day()
@@ -259,18 +265,21 @@ export default class Home extends React.Component {
             
             this.setState({
                 startDate:dayjs().subtract(7-dayjs().day(), 'day').format('YYYY-MM-DD'),
-                endDate:dayjs().add(dayLeft, 'day').format('YYYY-MM-DD')
+                endDate:dayjs().add(dayLeft, 'day').format('YYYY-MM-DD'),
+                dateType:'week'
             })
 
         }else if(type == 'month'){
             this.setState({
                 startDate:dayjs().startOf('month').format('YYYY-MM-DD'),
-                endDate:dayjs().endOf('month').format('YYYY-MM-DD')
+                endDate:dayjs().endOf('month').format('YYYY-MM-DD'),
+                dateType:'month'
             })
         }else{
             this.setState({
                 startDate:dayjs().startOf('year').format('YYYY-MM-DD'),
-                endDate:dayjs().endOf('year').format('YYYY-MM-DD')
+                endDate:dayjs().endOf('year').format('YYYY-MM-DD'),
+                dateType:'year'
             })
         }
     }
