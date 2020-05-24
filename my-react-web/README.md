@@ -70,3 +70,11 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ### antv
 `npm install @antv/g2 --save`
+
+
+
+#### 页面截图
+
+#### homePage
+
+<img src="./src/assets/screenShot/homePage.png" style="zoom:50%;" />

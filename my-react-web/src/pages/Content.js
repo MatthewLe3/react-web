@@ -19,7 +19,7 @@ import {
     GithubOutlined
 } from '@ant-design/icons';
 
-import myAvatar from '../asstes/img/avatar.png'
+import myAvatar from '../assets/img/avatar.png'
 
 
 
