@@ -1,14 +1,20 @@
 import React from 'react'
 import '../style/content/home.less'
 
-import { Tooltip, Progress, Tabs } from 'antd'
+import { Tooltip, Progress, Tabs, DatePicker } from 'antd'
 import { ExclamationCircleOutlined, CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
+import moment from 'moment';
 
 import { Chart } from '@antv/g2';
 
-const { TabPane } = Tabs;
+import dayjs from 'dayjs'
 
-const operations = '时间';
+const { TabPane } = Tabs;
+const { RangePicker } = DatePicker;
+
+
+const dateFormat = 'YYYY-MM-DD';
+
 
 
 export default class Home extends React.Component {
@@ -52,11 +58,21 @@ export default class Home extends React.Component {
                 { date: '2020-05-12', num: 53 },
                 { date: '2020-05-13', num: 3 },
                 { date: '2020-05-14', num: 13 },
-            ]
+            ],
+            startDate: '2020-01-01',
+            endDate: '2020-01-02'
         }
     }
 
     render() {
+        const operations = <div className='rightDate'>
+            <div className='changeDate' onClick={() => { this.getDate('today') }}>今日</div>
+            <div className='changeDate' onClick={() => { this.getDate('week') }}>本周</div>
+            <div className='changeDate' onClick={() => { this.getDate('month') }}>本月</div>
+            <div className='changeDate' onClick={() => { this.getDate('year') }}>本年</div>
+            <RangePicker value={[moment(this.state.startDate, dateFormat), moment(this.state.endDate, dateFormat)]} onChange={(date,dateString)=>this.changeDate(date,dateString)} />
+        </div>;
+
         return (
             <div>
                 <div className='header-content'>
@@ -227,6 +243,43 @@ export default class Home extends React.Component {
 
         visitedChart.axis('num', false)
         visitedChart.render();
+    }
+
+    getDate = (type)  => {
+        
+        if(type == 'today'){
+            this.setState({
+                startDate:dayjs().format('YYYY-MM-DD'),
+                endDate:dayjs().format('YYYY-MM-DD')
+            })
+        }else if(type == 'week'){
+            let dayLeft = 7 - dayjs().day()
+
+            if(dayjs().day() == 0) dayLeft = 0
+            
+            this.setState({
+                startDate:dayjs().subtract(7-dayjs().day(), 'day').format('YYYY-MM-DD'),
+                endDate:dayjs().add(dayLeft, 'day').format('YYYY-MM-DD')
+            })
+
+        }else if(type == 'month'){
+            this.setState({
+                startDate:dayjs().startOf('month').format('YYYY-MM-DD'),
+                endDate:dayjs().endOf('month').format('YYYY-MM-DD')
+            })
+        }else{
+            this.setState({
+                startDate:dayjs().startOf('year').format('YYYY-MM-DD'),
+                endDate:dayjs().endOf('year').format('YYYY-MM-DD')
+            })
+        }
+    }
+
+    changeDate = (date,dateString) => {
+        this.setState({
+            startDate:dateString[0],
+            endDate:dateString[1]
+        })
     }
 }
 

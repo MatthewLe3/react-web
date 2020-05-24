@@ -77,3 +77,21 @@
 .body-content div .body-tab /deep/ .ant-tabs-ink-bar {
   background-color: #1990ff;
 }
+.body-content div .body-tab /deep/ .ant-tabs-bar {
+  margin: 5px 0 5px 0;
+}
+.body-content div .body-tab /deep/ .ant-tabs-content {
+  border-top: 1px solid #f0f0f0;
+}
+.rightDate {
+  display: flex;
+}
+.rightDate .changeDate {
+  margin-right: 25px;
+  cursor: pointer;
+}
+.rightDate .ant-picker-range {
+  line-height: 32px;
+  height: 32px;
+  margin-top: 7px;
+}
