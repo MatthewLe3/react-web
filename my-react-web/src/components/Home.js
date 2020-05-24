@@ -3,6 +3,7 @@ import '../style/content/home.less'
 
 import { Tooltip, Progress, Tabs, DatePicker } from 'antd'
 import { Row, Col } from 'antd';
+import { Table } from 'antd';
 import { ExclamationCircleOutlined, CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
@@ -12,9 +13,38 @@ import dayjs from 'dayjs'
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
+const { Column } = Table;
 
 
 const dateFormat = 'YYYY-MM-DD';
+const columns = [
+    {
+        title: '排名',
+        dataIndex: 'rate',
+
+    },
+    {
+        title: '搜索关键词',
+        dataIndex: 'keyWords',
+        render: (text, record, index) => <a>{text + '-' + index}</a>,
+    },
+    {
+        title: '用户数',
+        dataIndex: 'users',
+        sorter: {
+            compare: (a, b) => a.users - b.users,
+            multiple: 3,
+        },
+    },
+    {
+        title: '周涨幅',
+        dataIndex: 'up',
+        sorter: {
+            compare: (a, b) => a.up - b.up,
+            multiple: 3,
+        },
+    },
+]
 
 
 
@@ -85,6 +115,56 @@ export default class Home extends React.Component {
                 { name: '工专路4号店', num: '321,435' },
                 { name: '工专路5号店', num: '321,435' },
                 { name: '工专路6号店', num: '321,435' },
+            ],
+
+            footerContent: [
+                {
+                    name: '搜索用户数', num: '12,321', trend: 'top', trendDate: '17.1', data: [
+                        { date: '2020-05-01', num: 275 },
+                        { date: '2020-05-02', num: 115 },
+                        { date: '2020-05-03', num: 120 },
+                        { date: '2020-05-04', num: 350 },
+                        { date: '2020-05-05', num: 150 },
+                        { date: '2020-05-06', num: 321 },
+                        { date: '2020-05-07', num: 132 },
+                        { date: '2020-05-08', num: 156 },
+                        { date: '2020-05-09', num: 150 },
+                        { date: '2020-05-10', num: 321 },
+                        { date: '2020-05-11', num: 132 },
+                        { date: '2020-05-12', num: 156 }
+                    ]
+                },
+                {
+                    name: '人均搜索次数', num: '2.7', trend: 'down', trendDate: '26.2', data: [
+                        { date: '2020-05-01', num: 275 },
+                        { date: '2020-05-02', num: 115 },
+                        { date: '2020-05-03', num: 120 },
+                        { date: '2020-05-04', num: 12 },
+                        { date: '2020-05-05', num: 312 },
+                        { date: '2020-05-06', num: 12 },
+                        { date: '2020-05-07', num: 42 },
+                        { date: '2020-05-08', num: 123 },
+                        { date: '2020-05-09', num: 431 },
+                        { date: '2020-05-10', num: 43 },
+                        { date: '2020-05-11', num: 12 },
+                        { date: '2020-05-12', num: 156 }
+                    ]
+                }
+            ],
+            tableData: [
+                { id: 1, keyWords: '搜索关键词', users: '983', up: '88', rate: 1 },
+                { id: 2, keyWords: '搜索关键词', users: '563', up: '12', rate: 2 },
+                { id: 3, keyWords: '搜索关键词', users: '453', up: '24', rate: 3 },
+                { id: 4, keyWords: '搜索关键词', users: '234', up: '53', rate: 4 },
+                { id: 5, keyWords: '搜索关键词', users: '745', up: '132', rate: 5 },
+            ],
+            pieData: [
+                { name: '家用电器', num: 4544 },
+                { name: '食用酒水', num: 3321 },
+                { name: '个护健康', num: 3113 },
+                { name: '服饰箱包', num: 2341 },
+                { name: '母婴产品', num: 1231 },
+                { name: '其他', num: 1231 },
             ]
         }
     }
@@ -142,6 +222,38 @@ export default class Home extends React.Component {
 
                     </div>
                 </div>
+                <div className='footer-content'>
+                    <Row>
+                        <Col span={12} push={0}>
+                            <div style={{ backgroundColor: '#fff', paddingRight: '12px' }}>
+                                <div className='footer-title'>
+                                    线上热门搜索
+                                </div>
+                                <div style={{ padding: '12px 24px' }}>
+                                    {this.footerContent()}
+                                </div>
+                                <div style={{ padding: '12px 24px' }}>
+                                    <Table columns={columns} dataSource={this.state.tableData} scroll={{ y: 300 }} rowKey={row => row.id}>
+                                    </Table>
+                                </div>
+                            </div>
+
+                        </Col>
+                        <Col span={12} pull={0}>
+                            <div style={{ backgroundColor: '#fff', paddingLeft: '12px' }}>
+                                <div className='footer-title'>
+                                    销售额类别占比
+                                </div>
+                                <div style={{ padding: '12px 24px' }}>
+                                    <h4>销售额</h4>
+                                    <div style={{ height: '493px', padding: '20px'}}>
+                                        <div id='pieChart' style={{ height: '300px' ,width:'100%'}}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
             </div>
         )
     }
@@ -151,6 +263,8 @@ export default class Home extends React.Component {
 
         setTimeout(() => {
             this.drawChart()
+            this.drawFooterChart()
+            this.drawPie()
         }, 100);
 
     }
@@ -477,6 +591,161 @@ export default class Home extends React.Component {
                 this.drawChart2()
             }, 100);
         }
+    }
+
+
+    footerContent = () => {
+        return (
+            <div style={{ display: 'flex' }}>
+                <div style={{ paddingRight: '24px', flex: 1 }}>
+                    <div className='footer-chart-title'>
+                        {this.state.footerContent[0].name}
+                        <Tooltip placement="top" title={this.state.footerContent[0].name + '信息'}>
+                            <ExclamationCircleOutlined style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                        </Tooltip>
+                    </div>
+                    <div>
+                        <span className='footer-chart-num'>{this.state.footerContent[0].num}</span>
+                        <span style={{ marginLeft: '10px', color: '#8b8c8b' }}>{this.state.footerContent[0].trendDate}</span>
+                        <CaretUpOutlined style={{ color: '#f5222d', marginLeft: '5px' }} />
+                    </div>
+                    <div id='searchChart' style={{ height: '50px' }}></div>
+                </div>
+                <div style={{ paddingLeft: '24px', flex: 1 }}>
+                    <div className='footer-chart-title'>
+                        {this.state.footerContent[1].name}
+                        <Tooltip placement="top" title={this.state.footerContent[1].name + '信息'}>
+                            <ExclamationCircleOutlined style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                        </Tooltip>
+                    </div>
+                    <div>
+                        <span className='footer-chart-num'>{this.state.footerContent[1].num}</span>
+                        <span style={{ marginLeft: '10px', color: '#8b8c8b' }}>{this.state.footerContent[1].trendDate}</span>
+                        <CaretDownOutlined style={{ color: '#f5222d', marginLeft: '5px' }} />
+                    </div>
+                    <div id='averageChart' style={{ height: '50px' }}></div>
+                </div>
+            </div>
+        )
+    }
+
+    drawFooterChart = () => {
+        const searchChartData = this.state.footerContent[0].data
+        const searchChart = new Chart({
+            container: 'searchChart', // 指定图表容器 ID
+            // width: document.querySelector('#payChart').offsetWidth, // 指定图表宽度
+            height: document.querySelector('#searchChart').offsetHeight, // 指定图表高度
+            padding: [20, 10, 0, 10],
+            autoFit: true,
+        });
+        searchChart.data(searchChartData);
+
+        searchChart
+            .line()
+            .position('date*num')
+            .shape('smooth');
+
+
+        searchChart
+            .area()
+            .position('date*num')
+
+        searchChart.axis('num', false)
+        searchChart.render();
+
+        const averageChartData = this.state.footerContent[1].data
+        const averageChart = new Chart({
+            container: 'averageChart', // 指定图表容器 ID
+            // width: document.querySelector('#payChart').offsetWidth, // 指定图表宽度
+            height: document.querySelector('#averageChart').offsetHeight, // 指定图表高度
+            padding: [20, 10, 0, 10],
+            autoFit: true,
+        });
+        averageChart.data(averageChartData);
+
+        averageChart
+            .line()
+            .position('date*num')
+            .shape('smooth');
+
+
+        averageChart
+            .area()
+            .position('date*num')
+
+        averageChart.axis('num', false)
+        averageChart.render();
+    }
+
+    drawPie = () => {
+        const pieData = this.state.pieData
+
+
+        let totalData = 0
+
+        this.state.pieData.map(val=>{
+            totalData += val.num
+        })
+        const pieChart = new Chart({
+            container: 'pieChart', // 指定图表容器 ID
+            // width: document.querySelector('#payChart').offsetWidth, // 指定图表宽度
+            height: document.querySelector('#pieChart').offsetHeight, // 指定图表高度
+            padding: [100, 10, 0, -210],
+            autoFit: true,
+        });
+        pieChart.data(pieData);
+
+        pieChart.coordinate('theta', {
+            radius: 0.75,
+            innerRadius: 0.7,
+        });
+
+        pieChart
+            .annotation()
+            .text({
+                position: ['50%', '50%'],
+                content: '总销售额',
+                style: {
+                    fontSize: 14,
+                    fill: '#8c8c8c',
+                    textAlign: 'center',
+                },
+                offsetY: -10,
+            })
+            .text({
+                position: ['50%', '50%'],
+                content: '￥ '+totalData,
+                style: {
+                    fontSize: 16,
+                    fill: '#8c8c8c',
+                    textAlign: 'center',
+                },
+                offsetX: -5,
+                offsetY: 20,
+            })
+
+        pieChart
+            .interval()
+            .adjust('stack')
+            .position('num')
+            .color('name')
+            .label('num', (num) => {
+                return {
+                  content: (data) => {
+                    return `${data.name}: ${(num/totalData*100).toFixed(2)}%`;
+                  },
+                };
+              })
+            
+
+            pieChart.legend({
+                position: 'right'
+              });
+
+        pieChart.interaction('element-active');
+        pieChart.render();
+
+
     }
 
 }

@@ -130,3 +130,25 @@
   line-height: 35px;
   width: 100px;
 }
+.footer-content {
+  padding: 0 12px 24px 12px;
+}
+.footer-title {
+  padding: 16px 24px;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-size: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.footer-chart-title {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  line-height: 22px;
+}
+.footer-chart-num {
+  height: 32px;
+  margin-right: 32px;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 24px;
+  line-height: 32px;
+}
