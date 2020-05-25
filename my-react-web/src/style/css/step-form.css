@@ -1,0 +1,28 @@
+.step-form {
+  background-color: #fff;
+}
+.step-form .step-form-title {
+  padding: 12px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.step-form .step-form-title div {
+  margin-right: 12px;
+  margin-bottom: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.step-form .step-form-title .step-form-descript {
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-weight: 400;
+}
+.step-form .step-form-content {
+  padding: 12px 24px;
+}
