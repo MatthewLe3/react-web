@@ -78,3 +78,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 #### homePage
 
 <img src="./src/assets/screenShot/homePage.png" style="zoom:50%;" />
+
+#### Basic-form
+
+![](./src/assets/screenShot/basic-form.gif)
+
