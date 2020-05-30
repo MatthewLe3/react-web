@@ -143,7 +143,6 @@ export default class StepForm extends React.Component {
         const current = this.state.current + 1;
         this.setState({ current });
         // this.onFinish()
-        console.log('ddd',document.getElementById('stepForm'.getFieldsValue()))
     }
 
     prev() {
