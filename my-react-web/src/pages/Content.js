@@ -118,7 +118,7 @@ class ContentPage extends React.Component {
                             <SubMenu key="form" icon={<FormOutlined />} title="表单页">
                                 <Menu.Item key="basic-form">基础表单</Menu.Item>
                                 <Menu.Item key="step-form">分步表单</Menu.Item>
-                                <Menu.Item key="advanced-form">高级表单</Menu.Item>
+                                {/* <Menu.Item key="advanced-form">高级表单</Menu.Item> */}
                             </SubMenu>
                             <SubMenu key="list" icon={<TableOutlined />} title="列表页">
                                 <Menu.Item key="table-list">查询表格</Menu.Item>
