@@ -93,3 +93,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 #### 标准表格
 ![](./src/assets/screenShot/basic-list.png)
+
+#### 卡片表格
+![](./src/assets/screenShot/card-list.png)
+
