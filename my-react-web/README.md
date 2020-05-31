@@ -91,3 +91,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ![](./src/assets/screenShot/table-list.png)
 
+#### 标准表格
+![](./src/assets/screenShot/basic-list.png)

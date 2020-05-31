@@ -1,0 +1,12 @@
+.basic-list {
+  padding: 24px;
+  background-color: #fff;
+}
+.basic-list ul {
+  list-style: none;
+}
+.basic-list ul li {
+  display: flex;
+  padding: 16px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}

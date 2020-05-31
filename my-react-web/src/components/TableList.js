@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Input, Select, Button } from 'antd';
+import { Table, Input, Select, Button} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import '../style/content/table-list.less'
 const { Option } = Select;
