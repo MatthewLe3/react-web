@@ -97,3 +97,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 #### 卡片表格
 ![](./src/assets/screenShot/card-list.png)
 
+#### 基础详情页
+![](./src/assets/screenShot/basic.png)
+
