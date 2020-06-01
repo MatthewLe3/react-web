@@ -1,0 +1,102 @@
+.center-name {
+  text-align: center;
+  margin-bottom: 4px;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+}
+.center-info {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: "tnum", "tnum";
+}
+.center-workInfo {
+  margin-bottom: 24px;
+}
+.center-workInfo div {
+  padding-left: 26px;
+}
+.center-workInfo div span {
+  margin-right: 8px;
+  font-size: 14px;
+}
+.center-tag .label {
+  margin-bottom: 8px;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+}
+.center-tag-content {
+  display: inline;
+}
+.center-tag-content span {
+  margin: 2px;
+}
+.center-team .label {
+  margin-bottom: 8px;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+}
+.center-team .group {
+  display: flex;
+  flex-wrap: wrap;
+}
+.center-team .group div {
+  width: 50%;
+  margin-bottom: 24px;
+}
+.center-team .group div img {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  border-radius: 50%;
+}
+.center-team .group div span {
+  padding-left: 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.center-team .group div span:hover {
+  color: #1890ff;
+}
+.center-airticle {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 16px 24px;
+}
+.center-airticle .center-airticle-title {
+  margin-bottom: 12px;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+.center-airticle .center-airticle-content {
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  max-width: 720px;
+  line-height: 22px;
+  margin-top: 16px;
+}
+.center-airticle .center-airticle-author {
+  margin-top: 16px;
+  color: rgba(0, 0, 0, 0.45);
+  line-height: 22px;
+}
+.center-card {
+  display: flex;
+  flex-wrap: wrap;
+}
+.center-card .app {
+  width: 33.3%;
+  padding: 12px;
+}
+.center-card /deep/ .card-user {
+  margin-bottom: 4px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  line-height: 20px;
+}
