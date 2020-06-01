@@ -115,3 +115,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 #### 500页面
 ![](./src/assets/screenShot/500.png)
 
+#### 个人中心
+![](./src/assets/screenShot/center.gif)
