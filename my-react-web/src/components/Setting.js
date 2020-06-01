@@ -1,11 +1,34 @@
 import React from 'react'
 import { Menu } from 'antd'
+import '../style/content/setting.less'
 
 export default class Setting extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentMenu:'basic'
+            currentMenu:'basic',
+            basicInfo:{
+                label:'基本信息',
+                email:'antdesign@alipay.com',
+                nickname:'vanliant',
+                introduction:'',
+                country:'中国',
+                city:['浙江','杭州'],
+                place:'xxxxx',
+                phone:['0752','88888']
+            },
+            safeInfo:{
+                label:'安全设置',
+                data:[]
+            },
+            accountInfo:{
+                label:'账号绑定',
+                data:[]
+            },
+            msgInfo:{
+                label:'新消息通知',
+                data:[]
+            },
         }
     }
 
@@ -23,7 +46,7 @@ export default class Setting extends React.Component {
                     <Menu.Item key="account">账号绑定</Menu.Item>
                     <Menu.Item key="msg">新消息通知</Menu.Item>
                 </Menu>
-                <div>
+                <div style={{padding:'8px 40px'}}>
                     {this.menuContent()}
                 </div>
             </div>
@@ -40,26 +63,26 @@ export default class Setting extends React.Component {
         let currentMenu = this.state.currentMenu
         if(currentMenu == 'basic'){
             return (
-                <div>
-                    basic
+                <div className='setting-content'>
+                    <div className='setting-label'>{this.state.basicInfo.label}</div>
                 </div>
             )
         }else if(currentMenu == 'safe'){
             return (
-                <div>
-                    safe
+                <div className='setting-content'>
+                    <div className='setting-label'>{this.state.safeInfo.label}</div>
                 </div>
             )
         }else if(currentMenu == 'account'){
             return (
-                <div>
-                    account
+                <div className='setting-content'>
+                    <div className='setting-label'>{this.state.accountInfo.label}</div>
                 </div>
             )
         }else{
             return (
-                <div>
-                    msg
+                <div className='setting-content'>
+                    <div className='setting-label'>{this.state.msgInfo.label}</div>
                 </div>
             )
         }
