@@ -117,3 +117,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 #### 个人中心
 ![](./src/assets/screenShot/center.gif)
+
+#### 个人设置
+![](./src/assets/screenShot/setting.gif)
+
