@@ -1,0 +1,71 @@
+@border: 1px solid #e6f6ff;
+
+.flow {
+    height: 600px;
+    display: flex;
+    background-color: #fff;
+
+    .flow-left {
+        width: 250px;
+        box-sizing: border-box;
+        border: @border;
+        div{
+            text-align: center;
+            margin: 20px auto;
+            img{
+                cursor: pointer;
+            }
+        }
+    }
+
+    .flow-center {
+        flex: 1;
+        display: flex;
+        box-sizing: border-box;
+        // border: 1px solid #e6f6ff;
+        border-top: @border;
+        border-bottom: @border;
+    }
+
+    .flow-right {
+        width: 250px;
+        box-sizing: border-box;
+        border: @border;
+    }
+}
+
+.editor {
+    display: flex;
+    flex: 1;
+    background-color: #f4f6f8;
+  }
+  
+  .editorBd {
+    flex: 1;
+  }
+
+  .graph {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+  }
+  
+  .itemPanel {
+    float: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    height: 500px;
+    background: #ffffff;
+    border-right: 1px solid #e8e8e8;
+  
+    .item {
+      margin-bottom: 24px;
+      user-select: none;
+  
+      img {
+        display: block;
+      }
+    }
+  }
