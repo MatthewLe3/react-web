@@ -1,24 +1,9 @@
 import React from 'react'
 // npm install gg-editor@2.0.4 --save
 import { Card } from 'antd';
-import { Col, Row } from 'antd';
-import GGEditor, { Flow, Item, ItemPanel, constants } from 'gg-editor';
+import GGEditor, { Flow, Item, ItemPanel, } from 'gg-editor';
 
 import styles from '../style/content/flow.less'
-// import styles from './index.less';
-
-// const { EditorCommand } = constants;
-// const FLOW_COMMAND_LIST = [
-//     EditorCommand.Undo,
-//     EditorCommand.Redo,
-//     '|',
-//     EditorCommand.Copy,
-//     EditorCommand.Paste,
-//     EditorCommand.Remove,
-//     '|',
-//     EditorCommand.ZoomIn,
-//     EditorCommand.ZoomOut,
-// ];
 const data = {
     nodes: [],
     edges: [],
@@ -62,8 +47,6 @@ export default class FlowPage extends React.Component {
     }
 
     render() {
-        console.log()
-
         return (
             <div className='flow'>
                 <div className='flow-center'>
@@ -88,7 +71,6 @@ export default class FlowPage extends React.Component {
 
     drawFlow = () => {
         if (this.state.width > 0) {
-            // console.log('sty',styles)
             return (
                 <GGEditor style={{ display: 'flex' }}>
                     <ItemPanel className={styles.itemPanel}>

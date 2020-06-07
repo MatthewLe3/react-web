@@ -124,3 +124,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 #### 流程图
 ![](./src/assets/screenShot/flow.png)
 
+#### 脑图
+![](./src/assets/screenShot/mind.png)
+
+

@@ -1,0 +1,23 @@
+@border: 1px solid #e6f6ff;
+.koni {
+    height: 600px;
+    display: flex;
+    background-color: #fff;
+
+
+    .koni-center {
+        flex: 1;
+        display: flex;
+        box-sizing: border-box;
+        // border: 1px solid #e6f6ff;
+        border-left: @border;
+        border-top: @border;
+        border-bottom: @border;
+    }
+
+    .koni-right {
+        width: 250px;
+        box-sizing: border-box;
+        border: @border;
+    }
+}

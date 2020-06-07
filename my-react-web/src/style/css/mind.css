@@ -1,0 +1,18 @@
+.mind {
+  height: 600px;
+  display: flex;
+  background-color: #fff;
+}
+.mind .mind-center {
+  flex: 1;
+  display: flex;
+  box-sizing: border-box;
+  border-left: 1px solid #e6f6ff;
+  border-top: 1px solid #e6f6ff;
+  border-bottom: 1px solid #e6f6ff;
+}
+.mind .mind-right {
+  width: 250px;
+  box-sizing: border-box;
+  border: 1px solid #e6f6ff;
+}
