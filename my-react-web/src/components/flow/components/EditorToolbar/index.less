@@ -1,0 +1,40 @@
+// @import '~antd/es/style/themes/default.less';
+
+.toolbar {
+  display: flex;
+  align-items: center;
+
+  :global {
+    .command .anticon {
+      display: inline-block;
+      width: 27px;
+      height: 27px;
+      margin: 0 6px;
+      padding-top: 6px;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        border: 1px solid #fff;
+      }
+    }
+
+    .disable .anticon {
+      color: red;
+      cursor: auto;
+
+      &:hover {
+        border: 1px solid #fff;
+      }
+    }
+  }
+}
+
+.tooltip {
+  :global {
+    .ant-tooltip-inner {
+      font-size: 12px;
+      border-radius: 0;
+    }
+  }
+}
