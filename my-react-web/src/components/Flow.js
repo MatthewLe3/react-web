@@ -69,13 +69,16 @@ export default class FlowPage extends React.Component {
                 <div className='flow-center'>
                     {this.drawFlow()}
                 </div>
-                <div className='flow-right'>右侧</div>
+                <div className='flow-right'>
+                    detail
+                </div>
             </div>
         )
     }
 
     componentDidMount() {
         setTimeout(() => {
+            
             this.setState({
                 height: document.querySelector('.flow-center').offsetHeight,
                 width: document.querySelector('.flow-center').offsetWidth-250
@@ -89,7 +92,7 @@ export default class FlowPage extends React.Component {
             return (
                 <GGEditor style={{ display: 'flex' }}>
                     <ItemPanel className={styles.itemPanel}>
-                        <Card bordered={false}>
+                        <Card bordered={false} style={{width:'250px',textAlign:'center',height:'100%',borderRight:'1px solid #e6f6ff'}}>
                             <Item
                                 type="node"
                                 size="72*72"
