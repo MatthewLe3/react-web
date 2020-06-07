@@ -121,3 +121,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 #### 个人设置
 ![](./src/assets/screenShot/setting.gif)
 
+#### 流程图
+![](./src/assets/screenShot/flow.png)
+
